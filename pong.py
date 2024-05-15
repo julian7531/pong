@@ -1,4 +1,4 @@
-#pong by julian
+#pong by julian7531
 
 import pygame
 pygame.init()
@@ -44,13 +44,13 @@ class Slider:
             self.y += self.vel
 
     def draw_slider_1(self):
-        pygame.draw.rect(win, (0,255,255) , (s1.x, s1.y, s1.width, s1.height) )
+        pygame.draw.rect(win, (0,255,255) , (slider_1.x, slider_1.y, slider_1.width, slider_1.height) )
         
     def draw_slider_2(self):
-        pygame.draw.rect(win, (255,0,0) , (s2.x, s2.y, s2.width, s2.height) )
+        pygame.draw.rect(win, (255,0,0) , (slider_2.x, slider_2.y, slider_2.width, slider_2.height) )
 
-s1 = Slider(25, 50, 5, 100, 2)
-s2 = Slider(710, 50, 5, 100, 2)
+slider_1 = Slider(25, 50, 5, 100, 1.4)
+slider_2 = Slider(710, 50, 5, 100, 1.4)
 
 speed = [1,1]
 
@@ -60,7 +60,6 @@ player_1_score = 0
 player_2_score = 0
 
 run = True
-game_close = False
 while run:
     pygame.time.delay(2)
 
@@ -73,24 +72,24 @@ while run:
     keys = pygame.key.get_pressed()
     win.fill((0,0,0))
 
-    s1.move_slider_1(keys)
-    s1.draw_slider_1()
+    slider_1.move_slider_1(keys)
+    slider_1.draw_slider_1()
     
-    s2.move_slider_2(keys)
-    s2.draw_slider_2()
+    slider_2.move_slider_2(keys)
+    slider_2.draw_slider_2()
     
     ball.move()
     ball.drawball()  
 
-    if ball.balld.left - (s1.x + s1.width) == 0 and (s1.y-20) < ball.balld.center[1] < (s1.y+s1.height+20) :
+    if ball.balld.left - (slider_1.x + slider_1.width) == 0 and (slider_1.y-20) < ball.balld.center[1] < (slider_1.y+slider_1.height+20) :
         ball.speed[0] = -ball.speed[0]
 
-    if ball.balld.right - (s2.x) == 0 and (s2.y-20) < ball.balld.center[1] < (s2.y+s2.height+20) :
+    if ball.balld.right - (slider_2.x) == 0 and (slider_2.y-20) < ball.balld.center[1] < (slider_2.y+slider_2.height+20) :
         ball.speed[0] = -ball.speed[0]
 
     if ball.balld.left == 0:
         player_2_score += 1
-        ball.balld.center = window_height / 2 , window_width / 2
+        ball.balld.center = window_height // 2 , window_width // 2
 
     if ball.balld.right == window_width:
         player_1_score += 1
@@ -99,4 +98,5 @@ while run:
     pygame.display.flip()
 
 pygame.quit()
+
 
